@@ -325,7 +325,7 @@ inline vec4 vl4Max(vec4 a , vec4 b)
 
 inline vec4 vl4Abs(vec4 v)
 {
-	return (vec3){ ABS(v.x) , ABS(v.y) , ABS(v.z) , ABS(v.w) };
+	return (vec4){ ABS(v.x) , ABS(v.y) , ABS(v.z) , ABS(v.w) };
 }
 
 inline float vl4Length(vec4 v)
