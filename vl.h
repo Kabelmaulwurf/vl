@@ -1,3 +1,23 @@
+/*
+
+                vl: vl.h (c) 2012 Kabelmaulwurf
+
+    F16 is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    F16 is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
+
 #ifndef _VL_H_
 #define _VL_H_
 
@@ -257,6 +277,11 @@ inline vec3 vl3Max(vec3 a , vec3 b)
 	return (vec3){ MIN(a.x,b.x) , MIN(a.y,b.y) , MIN(a.z,b.z)  };
 }
 
+inline vec3 vl3Abs(vec3 v)
+{
+	return (vec3){ ABS(v.x) , ABS(v.y) , ABS(v.z)  };
+}
+
 inline float vl3Length(vec3 v)
 {
 	return sqrt(v.x*v.x+v.y*v.y+v.z*v.z);
@@ -296,6 +321,11 @@ inline vec4 vl4Min(vec4 a , vec4 b)
 inline vec4 vl4Max(vec4 a , vec4 b)
 {
 	return (vec4){ MIN(a.x,b.x) , MIN(a.y,b.y) , MIN(a.z,b.z) , MIN(a.w,b.w) };
+}
+
+inline vec4 vl4Abs(vec4 v)
+{
+	return (vec3){ ABS(v.x) , ABS(v.y) , ABS(v.z) , ABS(v.w) };
 }
 
 inline float vl4Length(vec4 v)
