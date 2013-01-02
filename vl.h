@@ -6,7 +6,7 @@
 
 #define MIN(a,b) (((a)<(b))?(a):(b))
 #define MAX(a,b) (((a)>(b))?(a):(b))
-#define AB(a)	 ((a)<0?-(a):(a))
+#define ABS(a)	 ((a)<0?-(a):(a))
 
 #ifdef SSE
 #define ADD3(a,b) (vl3AddSSE(a,b))
@@ -31,79 +31,6 @@ typedef struct
 }__attribute__ ((__aligned__(16)))vec3;
 
 
-//==============================================================================
-//	Vec3 Utils
-//==============================================================================
-
-inline vec3 vl3Min(vec3 a , vec3 b)
-{
-	return (vec3){ MIN(a.x,b.x) , MIN(a.y,b.y) , MIN(a.z,b.z)  };
-}
-
-inline vec3 vl3Max(vec3 a , vec3 b)
-{
-	return (vec3){ MIN(a.x,b.x) , MIN(a.y,b.y) , MIN(a.z,b.z)  };
-}
-
-inline float vl3Length(vec3 v)
-{
-	return sqrt(v.x*v.x+v.y*v.y+v.z*v.z);
-}
-
-inline float vl3Dot(vec3 a, vec3 b)
-{
-    return a.x*b.x+a.y*b.y+a.z*b.z;
-}
-
-inline vec3 vl3Cross(vec3 a, vec3 b)
-{
-    vec3 r;
-
-    r.x = a.y*b.z-b.y*a.z;
-    r.y = a.z*b.x-b.z*a.x;
-    r.z = a.x*b.y-b.x*a.y;
-
-    return r;
-}
-
-inline vec3 vl3Normalize(vec3 v)
-{
-	float l = vl3Length(v);
-	l = 1.f/l;
-	return vlMulS(v,l);
-}
-//==============================================================================
-//	Vec4 Utils
-//==============================================================================
-
-inline vec4 vl4Min(vec4 a , vec4 b)
-{
-	return (vec4){ MIN(a.x,b.x) , MIN(a.y,b.y) , MIN(a.z,b.z) , MIN(a.w,b.w)  };
-}
-
-inline vec4 vl4Max(vec4 a , vec4 b)
-{
-	return (vec4){ MIN(a.x,b.x) , MIN(a.y,b.y) , MIN(a.z,b.z) , MIN(a.w,b.w) };
-}
-
-inline float vl4Length(vec4 v)
-{
-	return sqrt(v.x*v.x+v.y*v.y+v.z*v.z+v.w*v.w);
-}
-
-inline float vl4Dot(vec4 a, vec4 b)
-{
-    return a.x*b.x+a.y*b.y+a.z*b.z+a.w*b.w;
-}
-
-inline void v4Normalize(vec4 *v)
-{
-    float l  = v4Length(*v);
-    l = 1.f/l;
-    v->x *= l;
-    v->y *= l;
-    v->z *= l;
-}
 //==============================================================================
 // Vec3 Arithmetics (SSE)
 //==============================================================================
@@ -315,6 +242,81 @@ inline vec4 v4DivS(vec4 v,float s)
 {
     return (vec4) { v.x/s , v.y/s , v.z/s , v.w/s };
 }
+
+//==============================================================================
+//	Vec3 Utils
+//==============================================================================
+
+inline vec3 vl3Min(vec3 a , vec3 b)
+{
+	return (vec3){ MIN(a.x,b.x) , MIN(a.y,b.y) , MIN(a.z,b.z)  };
+}
+
+inline vec3 vl3Max(vec3 a , vec3 b)
+{
+	return (vec3){ MIN(a.x,b.x) , MIN(a.y,b.y) , MIN(a.z,b.z)  };
+}
+
+inline float vl3Length(vec3 v)
+{
+	return sqrt(v.x*v.x+v.y*v.y+v.z*v.z);
+}
+
+inline float vl3Dot(vec3 a, vec3 b)
+{
+    return a.x*b.x+a.y*b.y+a.z*b.z;
+}
+
+inline vec3 vl3Cross(vec3 a, vec3 b)
+{
+    vec3 r;
+
+    r.x = a.y*b.z-b.y*a.z;
+    r.y = a.z*b.x-b.z*a.x;
+    r.z = a.x*b.y-b.x*a.y;
+
+    return r;
+}
+
+inline vec3 vl3Normalize(vec3 v)
+{
+	float l = vl3Length(v);
+	l = 1.f/l;
+	return vl3Mulf(v,l);
+}
+//==============================================================================
+//	Vec4 Utils
+//==============================================================================
+
+inline vec4 vl4Min(vec4 a , vec4 b)
+{
+	return (vec4){ MIN(a.x,b.x) , MIN(a.y,b.y) , MIN(a.z,b.z) , MIN(a.w,b.w)  };
+}
+
+inline vec4 vl4Max(vec4 a , vec4 b)
+{
+	return (vec4){ MIN(a.x,b.x) , MIN(a.y,b.y) , MIN(a.z,b.z) , MIN(a.w,b.w) };
+}
+
+inline float vl4Length(vec4 v)
+{
+	return sqrt(v.x*v.x+v.y*v.y+v.z*v.z+v.w*v.w);
+}
+
+inline float vl4Dot(vec4 a, vec4 b)
+{
+    return a.x*b.x+a.y*b.y+a.z*b.z+a.w*b.w;
+}
+
+inline void vl4Normalize(vec4 *v)
+{
+    float l  = vl4Length(*v);
+    l = 1.f/l;
+    v->x *= l;
+    v->y *= l;
+    v->z *= l;
+}
+
 
 #endif
 
