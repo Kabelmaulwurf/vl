@@ -274,7 +274,7 @@ inline vec3 vl3Min(vec3 a , vec3 b)
 
 inline vec3 vl3Max(vec3 a , vec3 b)
 {
-	return (vec3){ MIN(a.x,b.x) , MIN(a.y,b.y) , MIN(a.z,b.z)  };
+	return (vec3){ MAX(a.x,b.x) , MAX(a.y,b.y) , MAX(a.z,b.z)  };
 }
 
 inline vec3 vl3Abs(vec3 v)
@@ -320,7 +320,7 @@ inline vec4 vl4Min(vec4 a , vec4 b)
 
 inline vec4 vl4Max(vec4 a , vec4 b)
 {
-	return (vec4){ MIN(a.x,b.x) , MIN(a.y,b.y) , MIN(a.z,b.z) , MIN(a.w,b.w) };
+	return (vec4){ MAX(a.x,b.x) , MAX(a.y,b.y) , MAX(a.z,b.z) , MAX(a.w,b.w) };
 }
 
 inline vec4 vl4Abs(vec4 v)
