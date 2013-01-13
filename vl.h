@@ -37,7 +37,7 @@
 #define ADD3(a,b) (vl3Add(a,b))
 #define SUB3(a,b) (vl3Sub(a,b))
 #define MUL3(a,b) (vl3Mul(a,b))
-#define DIvl(a,b) (vl3Div(a,b))
+#define DIV3(a,b) (vl3Div(a,b))
 #endif
 
 typedef struct
@@ -135,22 +135,22 @@ inline vec3 vl3Div(vec3 a,vec3 b)
 	Vec3 Arithmetics (Scalar)
 ==============================================================================*/
 
-inline vec3 vl3Addf(vec3 a,float s)
+inline vec3 vl3AddS(vec3 a,float s)
 {
     return (vec3) { a.x+s , a.y+s , a.z+s };
 }
 
-inline vec3 vl3Subf(vec3 a,float s)
+inline vec3 vl3SubS(vec3 a,float s)
 {
     return (vec3) { a.x-s , a.y-s , a.z-s };
 }
 
-inline vec3 vl3Mulf(vec3 a,float s)
+inline vec3 vl3MulS(vec3 a,float s)
 {
     return (vec3) { a.x*s , a.y*s , a.z*s };
 }
 
-inline vec3 vl3Divf(vec3 a,float s)
+inline vec3 vl3DivS(vec3 a,float s)
 {
     return (vec3) { a.x/s , a.y/s , a.z/s };
 }
