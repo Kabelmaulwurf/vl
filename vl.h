@@ -307,7 +307,7 @@ inline vec3 vl3Normalize(vec3 v)
 {
 	float l = vl3Length(v);
 	l = 1.f/l;
-	return vl3Mulf(v,l);
+	return vl3MulS(v,l);
 }
 /*==============================================================================
 	Vec4 Utils
