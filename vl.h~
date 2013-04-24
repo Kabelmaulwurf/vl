@@ -40,6 +40,7 @@
 #define DIV3(a,b) (vl3Div(a,b))
 #endif
 
+
 typedef struct
 {
 	float x,y,z;
