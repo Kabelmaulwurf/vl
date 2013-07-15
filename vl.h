@@ -41,18 +41,105 @@
 #endif
 
 
-
-
-typedef struct
+typedef struct 
 {
-	float x,y,z,w;
-}vec4;
+	float x,y;
+}vec2;
 
 typedef struct
 {
 	float x,y,z;
 }__attribute__ ((__aligned__(16)))vec3;
 
+typedef struct
+{
+	float x,y,z,w;
+}vec4;
+
+/*==============================================================================
+	Vec2 Arithmetics 
+==============================================================================*/
+inline vec2 vl2Add(vec2 a,vec2 b)
+{
+	return (vec2) { a.x+b.x,a.y+b.y};
+}
+
+inline vec2 vl2Sub(vec2 a,vec2 b)
+{
+	return (vec2) { a.x-b.x,a.y-b.y};
+}
+
+inline vec2 vl2Mul(vec2 a,vec2 b)
+{
+	return (vec2) { a.x*b.x,a.y*b.y};
+}
+
+inline vec2 vl2Div(vec2 a,vec2 b)
+{
+	return (vec2) { a.x/b.x,a.y/b.y};
+}
+
+/*==============================================================================
+	Vec2 Arithmetics (Scalar)
+==============================================================================*/
+inline vec2 vl2AddS(vec2 a,float s)
+{
+	return (vec2) { a.x+s,a.y+s};
+}
+
+inline vec2 vl2SubS(vec2 a,float s)
+{
+	return (vec2) { a.x-s,a.y-s};
+}
+
+inline vec2 vl2MulS(vec2 a,float s)
+{
+	return (vec2) { a.x*s,a.y*s};
+}
+
+inline vec2 vl2DivS(vec2 a,float s)
+{
+	return (vec2) { a.x/s,a.y/s};
+}
+/*==============================================================================
+	Vec2 Utils
+==============================================================================*/
+inline vec2 vl2Min(vec2 a , vec2 b)
+{
+	return (vec2){ MIN(a.x,b.x) , MIN(a.y,b.y)};
+}
+
+inline vec2 vl2Max(vec2 a , vec2 b)
+{
+	return (vec2){ MAX(a.x,b.x) , MAX(a.y,b.y)};
+}
+
+inline vec2 vl2Abs(vec2 v)
+{
+	return (vec2) {ABS(v.x),ABS(v.y)};
+}
+
+inline float vl2Length(vec2 v)
+{
+	return sqrt(v.x*v.x+v.y*v.y);
+}
+
+inline float vl2Dot(vec2 a, vec2 b)
+{
+	return a.x*b.x+a.y*b.y;
+}
+
+inline float vl2Cross(vec2 a, vec2 b)
+{
+	return a.x*b.y-a.y*b.x;
+}
+
+inline vec2 vl2Normalize(vec2 v)
+{
+	float l = vl2Length(v);
+	l = 1.0f/l;
+	return vl2MulS(v,l);
+}
 
 /*==============================================================================
 	Vec3 Arithmetics (SSE)
@@ -163,7 +250,7 @@ inline vec3 vl3DivS(vec3 a,float s)
 	Vec4 Arithmetics (SSE)
 ==============================================================================*/
 
-inline vec4 v4AddSSE(vec4 a,vec4 b)
+inline vec4 vl4AddSSE(vec4 a,vec4 b)
 {
 	vec4 r;
 	asm(
@@ -177,7 +264,7 @@ inline vec4 v4AddSSE(vec4 a,vec4 b)
 	return r;
 }
 
-inline vec4 v4SubSSE(vec4 a,vec4 b)
+inline vec4 vl4SubSSE(vec4 a,vec4 b)
 {
 	vec4 r;
 	asm(
@@ -191,7 +278,7 @@ inline vec4 v4SubSSE(vec4 a,vec4 b)
 	return r;
 }
 
-inline vec4 v4MulSSE(vec4 a,vec4 b)
+inline vec4 vl4MulSSE(vec4 a,vec4 b)
 {
 	vec4 r;
 	asm(
@@ -204,7 +291,7 @@ inline vec4 v4MulSSE(vec4 a,vec4 b)
 	);
 	return r;
 }
-inline vec4 v4DivSSE(vec4 a,vec4 b)
+inline vec4 vl4DivSSE(vec4 a,vec4 b)
 {
 	vec4 r;
 	asm(
@@ -222,22 +309,22 @@ inline vec4 v4DivSSE(vec4 a,vec4 b)
 	Vec4 Arithmetics
 ==============================================================================*/
 
-inline vec4 v4Add(vec4 a,vec4 b)
+inline vec4 vl4Add(vec4 a,vec4 b)
 {
     return (vec4) { a.x+b.x , a.y+b.y , a.z+b.z , a.w+b.w };
 }
 
-inline vec4 v4Sub(vec4 a,vec4 b)
+inline vec4 vl4Sub(vec4 a,vec4 b)
 {
     return (vec4) { a.x-b.x , a.y-b.y , a.z-b.z , a.w-b.w };
 }
 
-inline vec4 v4Mul(vec4 a,vec4 b)
+inline vec4 vl4Mul(vec4 a,vec4 b)
 {
     return (vec4) { a.x*b.x , a.y*b.y , a.z*b.z , a.w*b.w };
 }
 
-inline vec4 v4Div(vec4 a,vec4 b)
+inline vec4 vl4Div(vec4 a,vec4 b)
 {
     return (vec4) { a.x/b.x , a.y/b.y , a.z/b.z , a.w/b.w };
 }
@@ -246,22 +333,22 @@ inline vec4 v4Div(vec4 a,vec4 b)
 	Vec4 Arithmetics (Scalar)
 ==============================================================================*/
 
-inline vec4 v4AddS(vec4 v,float s)
+inline vec4 vl4AddS(vec4 v,float s)
 {
     return (vec4) { v.x+s , v.y+s , v.z+s , v.w+s };
 }
 
-inline vec4 v4SubS(vec4 v,float s)
+inline vec4 vl4SubS(vec4 v,float s)
 {
     return (vec4) { v.x-s , v.y-s , v.z-s , v.w-s };
 }
 
-inline vec4 v4MulS(vec4 v,float s)
+inline vec4 vl4MulS(vec4 v,float s)
 {
     return (vec4) { v.x*s , v.y*s , v.z*s , v.w*s };
 }
 
-inline vec4 v4DivS(vec4 v,float s)
+inline vec4 vl4DivS(vec4 v,float s)
 {
     return (vec4) { v.x/s , v.y/s , v.z/s , v.w/s };
 }
